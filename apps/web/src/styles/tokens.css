@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Evidence (dark) surfaces */
+    --ev-bg:          #101620;  /* deepest, the app frame behind everything */
+    --ev-surface:     #161E2B;  /* panels, the clause rail */
+    --ev-raised:      #1E2837;  /* cards and popovers sitting on a panel */
+    --ev-line:        #2A3547;  /* dividers and panel borders */
+    --ev-line-strong: #3A4759;  /* borders on interactive elements */
+    --ev-text:        #E8EDF5;
+    --ev-text-muted:  #8DA0BC;
+    --ev-text-faint:  #5F7290;
+
+    /* Document (light) surfaces */
+    --doc-bg:         #F6F8FB;  /* page background, cool paper */
+    --doc-surface:    #FFFFFF;
+    --doc-line:       #DFE5EE;
+    --doc-line-strong:#C3CDDB;
+    --doc-text:       #131B27;
+    --doc-text-muted: #566579;
+    --doc-text-faint: #8494A8;
+
+    /* Brand */
+    --brand:          #6B4EFF;  /* Verifyd violet. Never a verdict */
+    --brand-hover:    #7C63FF;
+    --brand-press:    #5A3DEB;
+    --brand-subtle:   #EDE9FF;
+    --brand-subtle-d: #241C4D;
+
+    /* Verdict Semantics - appear ONLY as verdicts */
+    --pass:           #1E9E63;
+    --pass-subtle:    #E3F6EC;
+    --pass-dark:      #123A2A;
+
+    --fail:           #D93838;
+    --fail-subtle:    #FCEAEA;
+    --fail-dark:      #43191B;
+
+    --flag:           #D08700;
+    --flag-subtle:    #FDF3DC;
+    --flag-dark:      #3D2E0C;
+
+    --info:           #2563EB;
+
+    /* Radius */
+    --r-xs:   4px;
+    --r-sm:   6px;
+    --r-md:   10px;
+    --r-lg:   14px;
+    --r-full: 999px;
+
+    /* Elevation & Shadows */
+    --sh-pop:        0 4px 16px -2px rgb(16 22 32 / 0.18);
+    --sh-modal:      0 24px 56px -12px rgb(16 22 32 / 0.34);
+    --sh-glow-brand: 0 0 0 3px rgb(107 78 255 / 0.28);
+
+    /* Durations & Easing */
+    --dur-instant: 90ms;
+    --dur-fast:    160ms;
+    --dur-base:    240ms;
+    --dur-slow:    420ms;
+    --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-inout:  cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --dur-instant: 1ms;
+      --dur-fast:    1ms;
+      --dur-base:    1ms;
+      --dur-slow:    1ms;
+    }
+  }
+
+  body {
+    background-color: var(--doc-bg);
+    color: var(--doc-text);
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .font-doc {
+    font-family: "Newsreader", "Source Serif 4", Georgia, serif;
+  }
+
+  .font-mono-tabular {
+    font-family: "JetBrains Mono", "SF Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom Scrollbar for dark evidence surfaces */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--ev-surface);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--ev-line);
+  border-radius: var(--r-full);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--ev-line-strong);
+}
