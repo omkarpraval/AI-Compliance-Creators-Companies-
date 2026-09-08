@@ -1,5 +1,14 @@
 # VERIFYD — AI Influencer Compliance Platform
 
+[![CI Pipeline](https://github.com/omkarpraval/AI-Compliance-Creators-Companies-/actions/workflows/ci.yml/badge.svg)](https://github.com/omkarpraval/AI-Compliance-Creators-Companies-/actions)
+[![Python 3.13](https://img.shields.io/badge/Python-3.13-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
+[![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Google Gemini 2.0](https://img.shields.io/badge/Google_Gemini-2.0_Flash-8E75B2?style=flat&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.4+-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 VERIFYD is an enterprise-grade AI compliance verification platform that cross-references influencer contracts against delivered video assets to generate multi-modal audit trails, clause-by-clause verifications, evidence timelines, and automated compliance scoring.
 
 ---

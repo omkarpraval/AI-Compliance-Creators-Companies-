@@ -1,0 +1,82 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend-tests:
+    name: Backend Pytest & Migrations
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: verifyd
+          POSTGRES_PASSWORD: verifyd
+          POSTGRES_DB: verifyd
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e apps/api
+          pip install pytest pytest-asyncio
+
+      - name: Run Alembic Migrations
+        env:
+          DATABASE_URL: postgresql+asyncpg://verifyd:verifyd@localhost:5432/verifyd
+          GEMINI_API_KEY: test_key
+        run: |
+          cd apps/api
+          python -m alembic upgrade head
+          cd ../..
+
+      - name: Run Pytest Suite
+        env:
+          DATABASE_URL: postgresql+asyncpg://verifyd:verifyd@localhost:5432/verifyd
+          GEMINI_API_KEY: test_key
+        run: |
+          python -m pytest apps/api/tests -v
+
+  frontend-build:
+    name: Frontend Typecheck & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install Dependencies
+        working-directory: apps/web
+        run: npm ci || npm install
+
+      - name: Build Frontend Bundle
+        working-directory: apps/web
+        run: npm run build
